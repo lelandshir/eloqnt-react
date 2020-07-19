@@ -1,51 +1,76 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Form from "./Form.jsx";
+import AddLiquorForm from "./AddLiquorForm.jsx";
 
 export default class Liquor extends Component {
   state = {
     liquor: [],
+    id: "",
     header: "Liquor Inventory",
-    // search: "",
   };
   style = {
+    deleteButton: {
+      fontSize: "12px",
+      padding: "1px 1 1 1",
+      borderRadius: "5rem",
+      marginLeft: "20px",
+      fontWeight: "900",
+      backgroundColor: "#bc0102",
+    },
     padding: "20px 0 0 30px",
     container: { padding: "30px" },
     input: { marginLeft: "30px" },
-    ulStyle: { paddingLeft: "30px", margin: "5px", listStyleType: "none" },
+    ulStyle: { paddingLeft: "30px", margin: "5px" },
   };
 
   componentDidMount() {
-    axios.get("http://localhost:8008/liquor").then((res) => {
+    axios.get("/liquor").then((res) => {
       this.setState({
         liquor: res.data,
       });
     });
   }
 
+  //pass the id as seen in Mongo and an event
+  deleteLiquor = (_id, e) => {
+    axios.delete(`/liquor/${_id}`).then((res) => {
+      console.log(res);
+      console.log(res.data);
+      const liquor = this.state.liquor.filter((liquors) => liquors._id !== _id);
+      this.setState({ liquor });
+    });
+  };
+
   render() {
     return (
       <div style={this.style.container}>
-        <Form />
+        <AddLiquorForm />
         <h3 style={this.style}>{this.state.header}</h3>
         <hr />
         {/*search*/}
-        <input
-          type="text"
-          placeholder="smart search"
-          style={this.style.input}
-        />
+        <input type="text" placeholder="search" style={this.style.input} />
         {/*mapping liquor data from db*/}
         {this.state.liquor.map((liquors, i) => {
           return (
             <ul style={this.style.ulStyle} key={i}>
-              <p style={this.liStyle}>
-                <b>{liquors.brand}</b> | <b>Type:</b> {liquors.type} |
-                <b> Vendor: </b>
-                {liquors.vendor} | <b>Cost:</b> ${liquors.cost} | <b>OH: </b>
-                {liquors.qtyOnHand} (btls) | <b>PAR:</b> {liquors.par} |
-                <b> Order Qty: </b> {liquors.orderQty}
-              </p>
+              <li>
+                <p style={this.liStyle}>
+                  <b>{liquors.brand}</b> | <b>Type:</b> {liquors.type} |
+                  <b> Vendor: </b>
+                  {liquors.vendor} | <b>Cost:</b> ${liquors.cost} | <b>OH: </b>
+                  {liquors.qtyOnHand} (btls) | <b>PAR:</b> {liquors.par} |
+                  <b> Order Qty: </b> {liquors.orderQty} | <b>Notes: </b>
+                  {liquors.notes}
+                  <button
+                    title="delete item"
+                    className="btn-xs btn-danger"
+                    style={this.style.deleteButton}
+                    onClick={(e) => this.deleteLiquor(liquors._id, e)}
+                  >
+                    x
+                  </button>
+                </p>
+              </li>
             </ul>
           );
         })}

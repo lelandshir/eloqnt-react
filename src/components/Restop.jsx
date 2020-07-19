@@ -15,7 +15,7 @@ export default class restop extends Component {
   };
   //get restops in db
   componentDidMount() {
-    axios.get("http://localhost:8008/restop").then((res) => {
+    axios.get("/restop").then((res) => {
       this.setState({
         restop: res.data,
       });
