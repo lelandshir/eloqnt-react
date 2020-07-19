@@ -3,14 +3,15 @@ import axios from "axios";
 
 export default class Form extends Component {
   state = {
-    brand: "",
-    type: "",
-    vendor: "",
+    alias: "",
     cost: "",
     qtyOnHand: "",
     par: "",
     orderQty: "",
+    item: "",
+    vendor: "",
     notes: "",
+    img: "",
   };
 
   style = {
@@ -27,7 +28,7 @@ export default class Form extends Component {
       color: "#fff",
       fontWeight: "600",
       borderRadius: ".3rem",
-      marginTop: "5px",
+      marginTop: "0px",
     },
     padding: "20px 0 0 30px",
     container: { padding: "30px" },
@@ -42,33 +43,35 @@ export default class Form extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.handleSubmit(event, {
-      brand: this.state.brand,
-      type: this.state.type,
-      vendor: this.state.vendor,
+      alias: this.state.alias,
       cost: this.state.cost,
       qtyOnHand: this.state.qtyOnHand,
       par: this.state.par,
       orderQty: this.state.orderQty,
+      item: this.state.item,
+      vendor: this.state.vendor,
       notes: this.state.notes,
+      img: this.state.img,
     });
   };
 
-  addLiquor = (event) => {
+  addRestopItem = (event) => {
     event.preventDefault();
     axios
-      .post("/liquor", {
-        brand: this.state.brand,
-        type: this.state.type,
-        vendor: this.state.vendor,
+      .post("/restop", {
+        alias: this.state.alias,
         cost: this.state.cost,
         qtyOnHand: this.state.qtyOnHand,
         par: this.state.par,
         orderQty: this.state.orderQty,
+        item: this.state.item,
+        vendor: this.state.vendor,
         notes: this.state.notes,
+        img: this.state.img,
       })
       .then((res) => {
         this.setState({
-          liquor: res,
+          restop: res,
         });
         this.clearForm();
       })
@@ -85,14 +88,15 @@ export default class Form extends Component {
 
   clearForm = () => {
     this.setState({
-      brand: "",
-      type: "",
-      vendor: "",
+      alias: "",
       cost: "",
       qtyOnHand: "",
       par: "",
       orderQty: "",
+      item: "",
+      vendor: "",
       notes: "",
+      img: "",
     });
   };
 
@@ -103,28 +107,21 @@ export default class Form extends Component {
         className="form-check form-check-inline"
         style={this.style.div}
       >
-        <h3 style={this.style.formHeader}>Add Item to Liquor Master</h3>
-        <form onSubmit={this.addLiquor}>
+        <h3 style={this.style.formHeader}>Add Item to Restop Master</h3>
+        <form onSubmit={this.addRestopItem}>
           <input
             onChange={this.handleChange}
-            id={"brand"}
+            id={"item"}
             type="text"
-            placeholder="brand"
-            value={this.state.brand}
+            placeholder="item"
+            value={this.state.item}
           />
           <input
             onChange={this.handleChange}
-            id={"type"}
+            id={"alias"}
             type="text"
-            placeholder="type"
-            value={this.state.type}
-          />
-          <input
-            onChange={this.handleChange}
-            id={"vendor"}
-            type="text"
-            placeholder="vendor"
-            value={this.state.vendor}
+            placeholder="what we call it"
+            value={this.state.alias}
           />
           <input
             onChange={this.handleChange}
@@ -156,13 +153,26 @@ export default class Form extends Component {
           />
           <input
             onChange={this.handleChange}
+            id={"vendor"}
+            type="text"
+            placeholder="vendor"
+            value={this.state.vendor}
+          />
+          <input
+            onChange={this.handleChange}
             id={"notes"}
             type="text"
             placeholder="notes"
             value={this.state.notes}
           />
-          <br />
-          <input style={this.style.submit} type="submit" value="add liquor" />
+          <input
+            onChange={this.handleChange}
+            id={"img"}
+            type="text"
+            placeholder="image url"
+            value={this.state.img}
+          />
+          <input style={this.style.submit} type="submit" value="add item" />
         </form>
       </div>
     );

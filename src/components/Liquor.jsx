@@ -5,7 +5,6 @@ import AddLiquorForm from "./AddLiquorForm.jsx";
 export default class Liquor extends Component {
   state = {
     liquor: [],
-    id: "",
     header: "Liquor Inventory",
   };
   style = {
@@ -31,14 +30,21 @@ export default class Liquor extends Component {
     });
   }
 
-  //pass the id as seen in Mongo and an event
+  //pass the id as seen in Mongo and an event, filter() takes a rule from a callback -> return array with id's that are not the equal to the one I want to delete
   deleteLiquor = (_id, e) => {
-    axios.delete(`/liquor/${_id}`).then((res) => {
-      console.log(res);
-      console.log(res.data);
-      const liquor = this.state.liquor.filter((liquors) => liquors._id !== _id);
-      this.setState({ liquor });
-    });
+    axios
+      .delete(`/liquor/${_id}`)
+      .then((res) => {
+        // console.log(res);
+        // console.log(res.data);
+        const liquor = this.state.liquor.filter(
+          (liquors) => liquors._id !== _id
+        );
+        this.setState({ liquor });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   render() {
@@ -49,7 +55,7 @@ export default class Liquor extends Component {
         <hr />
         {/*search*/}
         <input type="text" placeholder="search" style={this.style.input} />
-        {/*mapping liquor data from db*/}
+        {/*map over array of objects from db*/}
         {this.state.liquor.map((liquors, i) => {
           return (
             <ul style={this.style.ulStyle} key={i}>

@@ -3,12 +3,12 @@ import axios from "axios";
 
 export default class Form extends Component {
   state = {
-    brand: "",
-    type: "",
-    vendor: "",
+    item: "",
+    category: "",
     cost: "",
     qtyOnHand: "",
     par: "",
+    vendor: "",
     orderQty: "",
     notes: "",
   };
@@ -42,33 +42,33 @@ export default class Form extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.handleSubmit(event, {
-      brand: this.state.brand,
-      type: this.state.type,
-      vendor: this.state.vendor,
+      alias: this.state.alias,
       cost: this.state.cost,
       qtyOnHand: this.state.qtyOnHand,
       par: this.state.par,
       orderQty: this.state.orderQty,
+      item: this.state.item,
+      vendor: this.state.vendor,
       notes: this.state.notes,
     });
   };
 
-  addLiquor = (event) => {
+  addFoodItem = (event) => {
     event.preventDefault();
     axios
-      .post("/liquor", {
-        brand: this.state.brand,
-        type: this.state.type,
-        vendor: this.state.vendor,
+      .post("/food", {
+        alias: this.state.alias,
         cost: this.state.cost,
         qtyOnHand: this.state.qtyOnHand,
         par: this.state.par,
         orderQty: this.state.orderQty,
+        item: this.state.item,
+        vendor: this.state.vendor,
         notes: this.state.notes,
       })
       .then((res) => {
         this.setState({
-          liquor: res,
+          food: res,
         });
         this.clearForm();
       })
@@ -85,12 +85,12 @@ export default class Form extends Component {
 
   clearForm = () => {
     this.setState({
-      brand: "",
-      type: "",
-      vendor: "",
+      item: "",
+      category: "",
       cost: "",
       qtyOnHand: "",
       par: "",
+      vendor: "",
       orderQty: "",
       notes: "",
     });
@@ -103,28 +103,21 @@ export default class Form extends Component {
         className="form-check form-check-inline"
         style={this.style.div}
       >
-        <h3 style={this.style.formHeader}>Add Item to Liquor Master</h3>
-        <form onSubmit={this.addLiquor}>
+        <h3 style={this.style.formHeader}>Add Food Item to Master</h3>
+        <form onSubmit={this.addFoodItem}>
           <input
             onChange={this.handleChange}
-            id={"brand"}
+            id={"item"}
             type="text"
-            placeholder="brand"
-            value={this.state.brand}
+            placeholder="item"
+            value={this.state.item}
           />
           <input
             onChange={this.handleChange}
-            id={"type"}
+            id={"category"}
             type="text"
-            placeholder="type"
-            value={this.state.type}
-          />
-          <input
-            onChange={this.handleChange}
-            id={"vendor"}
-            type="text"
-            placeholder="vendor"
-            value={this.state.vendor}
+            placeholder='category (ie: "meat")'
+            value={this.state.category}
           />
           <input
             onChange={this.handleChange}
@@ -149,6 +142,13 @@ export default class Form extends Component {
           />
           <input
             onChange={this.handleChange}
+            id={"vendor"}
+            type="text"
+            placeholder="vendor"
+            value={this.state.vendor}
+          />
+          <input
+            onChange={this.handleChange}
             id={"orderQty"}
             type="number"
             placeholder="order quantity"
@@ -161,8 +161,11 @@ export default class Form extends Component {
             placeholder="notes"
             value={this.state.notes}
           />
-          <br />
-          <input style={this.style.submit} type="submit" value="add liquor" />
+          <input
+            style={this.style.submit}
+            type="submit"
+            value="add food item"
+          />
         </form>
       </div>
     );
