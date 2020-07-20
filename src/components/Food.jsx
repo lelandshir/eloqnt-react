@@ -24,7 +24,7 @@ export default class food extends Component {
   };
   //get foods in db
   componentDidMount() {
-    axios.get("http://localhost:8008/food").then((res) => {
+    axios.get("/food").then((res) => {
       this.setState({
         food: res.data,
       });

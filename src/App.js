@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.css";
 import Header from "./components/Header.jsx";
 import Navigation from "./components/Navigation.jsx";
@@ -9,17 +10,15 @@ import Food from "./components/Food.jsx";
 export default class App extends Component {
   render() {
     return (
-      <div>
-        <Header />
-        <Navigation />
-        <Liquor />
-        <Restop />
-        <Food />
-      </div>
+      <Router>
+        <div className="container">
+          <Header />
+          <Navigation />
+          <Route path="/liquor" exact component={Liquor} />
+          <Route path="/food" exact component={Food} />{" "}
+          <Route path="/restop" exact component={Restop} />
+        </div>
+      </Router>
     );
   }
 }
-
-// import ReactDOM from "react-dom";
-// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-// import axios from "axios";

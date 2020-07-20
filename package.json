@@ -1,4 +1,5 @@
 {
+  "proxy": "https://infinite-cliffs-04410.herokuapp.com",
   "name": "frntnd",
   "version": "0.1.0",
   "private": true,

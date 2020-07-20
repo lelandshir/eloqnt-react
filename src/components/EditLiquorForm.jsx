@@ -4,14 +4,7 @@ import axios from "axios";
 export default class EditLiquorForm extends Component {
   state = {
     liquor: [],
-    brand: "",
-    type: "",
-    vendor: "",
-    cost: "",
-    qtyOnHand: "",
-    par: "",
-    orderQty: "",
-    notes: "",
+
     formVisible: false,
   };
 
@@ -52,9 +45,10 @@ export default class EditLiquorForm extends Component {
     });
   }
 
-  editLiquor = (id) => {
+  editLiquor = (_id) => {
+    console.log(_id);
     axios
-      .put(`/liquor/` + id, {
+      .put(`/liquor/` + _id, {
         brand: this.state.brand,
         type: this.state.type,
         vendor: this.state.vendor,
@@ -92,9 +86,11 @@ export default class EditLiquorForm extends Component {
       orderQty: this.state.orderQty,
       notes: this.state.notes,
     });
+    this.props.toggleForm();
   };
 
   render() {
+    console.log(this.props.liquors);
     return (
       <div
         align="center"
@@ -110,7 +106,7 @@ export default class EditLiquorForm extends Component {
             id={"cost"}
             type="number"
             placeholder="cost"
-            value={this.state.cost}
+            defaultValue={this.props.liquors.cost}
           />
           <input
             className="form-control form-control-sm"
@@ -118,7 +114,7 @@ export default class EditLiquorForm extends Component {
             id={"qtyOnHand"}
             type="number"
             placeholder="on-hand"
-            value={this.state.qtyOnHand}
+            defaultValue={this.props.liquors.qtyOnHand}
           />
           <input
             className="form-control form-control-sm"
@@ -126,7 +122,7 @@ export default class EditLiquorForm extends Component {
             id={"par"}
             type="number"
             placeholder="PAR"
-            value={this.state.par}
+            defaultValue={this.props.liquors.par}
           />
           <input
             className="form-control form-control-sm"
@@ -134,7 +130,7 @@ export default class EditLiquorForm extends Component {
             id={"orderQty"}
             type="number"
             placeholder="order quantity"
-            value={this.state.orderQty}
+            defaultValue={this.props.liquors.orderQty}
           />
           <input
             className="form-control form-control-sm"
@@ -142,7 +138,7 @@ export default class EditLiquorForm extends Component {
             id={"notes"}
             type="text"
             placeholder="notes"
-            value={this.state.notes}
+            defaultValue={this.props.liquors.notes}
           />
           <input
             className="form-control form-control-sm"
@@ -150,8 +146,7 @@ export default class EditLiquorForm extends Component {
             width="21px"
             id={"brand"}
             type="text"
-            placeholder="brand"
-            value={this.state.brand}
+            defaultValue={this.props.liquors.brand}
           />
           <input
             className="form-control form-control-sm"
@@ -159,7 +154,7 @@ export default class EditLiquorForm extends Component {
             id={"type"}
             type="text"
             placeholder="type"
-            value={this.state.type}
+            defaultValue={this.props.liquors.type}
           />
           <input
             className="form-control form-control-sm"
@@ -167,7 +162,7 @@ export default class EditLiquorForm extends Component {
             id={"vendor"}
             type="text"
             placeholder="vendor"
-            value={this.state.vendor}
+            defaultValue={this.props.liquors.vendor}
           />
           <br />
           <input
@@ -175,13 +170,13 @@ export default class EditLiquorForm extends Component {
             style={this.style.submit}
             type="submit"
             value="submit edits"
-            onClick={this.editLiquor}
+            onClick={() => this.editLiquor(this.props.liquors._id)}
           />
           <br />
           <input
             className="form-control form-control-sm"
             type="submit"
-            onClick={this.toggleForm}
+            onClick={this.props.toggleForm}
             value="cancel"
             style={this.style.submit}
           />

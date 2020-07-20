@@ -5,7 +5,6 @@ import EditLiquorForm from "./EditLiquorForm.jsx";
 
 export default class Liquor extends Component {
   state = {
-    _id: "",
     liquor: [],
     header: "Liquor Inventory",
     formVisible: false,
@@ -25,8 +24,7 @@ export default class Liquor extends Component {
     ulStyle: { paddingLeft: "30px", margin: "5px" },
   };
 
-  toggleForm = (e) => {
-    e.preventDefault();
+  toggleForm = () => {
     this.setState({
       formVisible: !this.state.formVisible,
     });
@@ -67,6 +65,7 @@ export default class Liquor extends Component {
 
   //pass the id as seen in Mongo and an event, filter() takes a rule from a callback -> return array with id's that are not the equal to the one I want to delete
   deleteLiquor = (_id, e) => {
+    console.log(_id);
     axios
       .delete(`/liquor/${_id}`)
       .then((res) => {
@@ -110,13 +109,10 @@ export default class Liquor extends Component {
                   x
                 </button>
                 {this.state.formVisible ? (
-                  <EditLiquorForm>
-                    <input
-                      type="submit"
-                      value="cancel"
-                      onClick={(e) => this.toggleForm}
-                    />
-                  </EditLiquorForm>
+                  <EditLiquorForm
+                    liquors={liquors}
+                    toggleForm={this.toggleForm}
+                  />
                 ) : (
                   <input onClick={this.toggleForm} type="submit" value="edit" />
                 )}
