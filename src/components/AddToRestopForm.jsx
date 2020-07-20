@@ -21,14 +21,15 @@ export default class Form extends Component {
       borderRadius: ".3rem",
       padding: "20px",
     },
-    formHeader: { marginRight: "5px" },
+    formHeader: { marginRight: "10px" },
     submit: {
-      width: "175px",
+      width: "inherit",
       backgroundColor: "#037bfe",
       color: "#fff",
       fontWeight: "600",
       borderRadius: ".3rem",
       marginTop: "0px",
+      position: "center",
     },
     padding: "20px 0 0 30px",
     container: { padding: "30px" },
@@ -102,11 +103,7 @@ export default class Form extends Component {
 
   render() {
     return (
-      <div
-        align="center"
-        className="form-check form-check-inline"
-        style={this.style.div}
-      >
+      <div className="form-check form-check-inline" style={this.style.div}>
         <h3 style={this.style.formHeader}>Add Item to Restop Master</h3>
         <form onSubmit={this.addRestopItem}>
           <input
