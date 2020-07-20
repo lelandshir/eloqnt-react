@@ -108,6 +108,7 @@ export default class Form extends Component {
             type="text"
             placeholder="brand"
             value={this.state.brand}
+            name="liqCost"
           />
           <input
             onChange={this.handleChange}
@@ -115,6 +116,7 @@ export default class Form extends Component {
             type="text"
             placeholder="type"
             value={this.state.type}
+            name="liqType"
           />
           <input
             onChange={this.handleChange}
@@ -122,6 +124,7 @@ export default class Form extends Component {
             type="text"
             placeholder="vendor"
             value={this.state.vendor}
+            name="liqVendor"
           />
           <input
             onChange={this.handleChange}
@@ -129,6 +132,7 @@ export default class Form extends Component {
             type="number"
             placeholder="cost"
             value={this.state.cost}
+            name="liqCost"
           />
           <input
             onChange={this.handleChange}
@@ -136,6 +140,7 @@ export default class Form extends Component {
             type="number"
             placeholder="on-hand"
             value={this.state.qtyOnHand}
+            name="liqOH"
           />
           <input
             onChange={this.handleChange}
@@ -143,6 +148,7 @@ export default class Form extends Component {
             type="number"
             placeholder="PAR"
             value={this.state.par}
+            name="liqPAR"
           />
           <input
             onChange={this.handleChange}
@@ -150,6 +156,7 @@ export default class Form extends Component {
             type="number"
             placeholder="order quantity"
             value={this.state.orderQty}
+            name="liqOQ"
           />
           <input
             onChange={this.handleChange}
@@ -157,6 +164,7 @@ export default class Form extends Component {
             type="text"
             placeholder="notes"
             value={this.state.notes}
+            name="liqNotes"
           />
           <br />
           <input style={this.style.submit} type="submit" value="add liquor" />

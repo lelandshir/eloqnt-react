@@ -5,6 +5,7 @@ import EditLiquorForm from "./EditLiquorForm.jsx";
 
 export default class Liquor extends Component {
   state = {
+    _id: "",
     liquor: [],
     header: "Liquor Inventory",
     formVisible: false,
@@ -14,7 +15,7 @@ export default class Liquor extends Component {
       fontSize: "12px",
       padding: "1px 1 1 1",
       borderRadius: "5rem",
-      marginLeft: "20px",
+      margin: "10px",
       fontWeight: "900",
       backgroundColor: "#bc0102",
     },
@@ -24,7 +25,8 @@ export default class Liquor extends Component {
     ulStyle: { paddingLeft: "30px", margin: "5px" },
   };
 
-  toggleForm = () => {
+  toggleForm = (e) => {
+    e.preventDefault();
     this.setState({
       formVisible: !this.state.formVisible,
     });
@@ -38,13 +40,38 @@ export default class Liquor extends Component {
     });
   }
 
+  editLiquor = (_id) => {
+    // e.preventDefault();
+    axios
+      .put(`/liquor/${_id}`, {
+        brand: this.state.brand,
+        type: this.state.type,
+        vendor: this.state.vendor,
+        cost: this.state.cost,
+        qtyOnHand: this.state.qtyOnHand,
+        par: this.state.par,
+        orderQty: this.state.orderQty,
+        notes: this.state.notes,
+      })
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        this.setState({
+          liquor: res,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   //pass the id as seen in Mongo and an event, filter() takes a rule from a callback -> return array with id's that are not the equal to the one I want to delete
   deleteLiquor = (_id, e) => {
     axios
       .delete(`/liquor/${_id}`)
       .then((res) => {
-        // console.log(res);
-        // console.log(res.data);
+        console.log(res);
+        console.log(res.data);
         const liquor = this.state.liquor.filter(
           (liquors) => liquors._id !== _id
         );
@@ -84,10 +111,14 @@ export default class Liquor extends Component {
                 </button>
                 {this.state.formVisible ? (
                   <EditLiquorForm>
-                    <button onClick={this.toggleForm}>cancel</button>
+                    <input
+                      type="submit"
+                      value="cancel"
+                      onClick={(e) => this.toggleForm}
+                    />
                   </EditLiquorForm>
                 ) : (
-                  <button onClick={this.toggleForm}>edit</button>
+                  <input onClick={this.toggleForm} type="submit" value="edit" />
                 )}
               </div>
             </ul>

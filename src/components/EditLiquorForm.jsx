@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default class EditLiquorForm extends Component {
   state = {
+    liquor: [],
     brand: "",
     type: "",
     vendor: "",
@@ -23,13 +24,13 @@ export default class EditLiquorForm extends Component {
   style = {
     div: {
       backgroundColor: "whitesmoke",
-      // border: "1px solid black",
+      border: "1px solid black",
       borderRadius: ".3rem",
       padding: "20px",
     },
     formHeader: { marginRight: "5px" },
     submit: {
-      width: "175px",
+      // width: "175px",
       backgroundColor: "#037bfe",
       color: "#fff",
       fontWeight: "600",
@@ -43,10 +44,17 @@ export default class EditLiquorForm extends Component {
     ulStyle: { paddingLeft: "30px", margin: "5px", listStyleType: "none" },
   };
 
-  editLiquor = (_id, e) => {
-    e.preventDefault();
+  componentDidMount() {
+    axios.get("/liquor").then((res) => {
+      this.setState({
+        liquor: res.data,
+      });
+    });
+  }
+
+  editLiquor = (id) => {
     axios
-      .put(`/liquor/${_id}`, {
+      .put(`/liquor/` + id, {
         brand: this.state.brand,
         type: this.state.type,
         vendor: this.state.vendor,
@@ -60,9 +68,8 @@ export default class EditLiquorForm extends Component {
         console.log(res);
         console.log(res.data);
         this.setState({
-          liquor: res,
+          liquor: res.data,
         });
-        this.clearForm();
       })
       .catch((err) => {
         console.log(err);
@@ -75,7 +82,7 @@ export default class EditLiquorForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.handleSubmit(event, {
+    this.setState({
       brand: this.state.brand,
       type: this.state.type,
       vendor: this.state.vendor,
@@ -95,8 +102,8 @@ export default class EditLiquorForm extends Component {
         style={this.style.div}
         width="200px"
       >
-        {/*<h3 style={this.style.formHeader}>Edit Liquor</h3>*/}
-        <form onSubmit={this.editLiquor} className="form-inline">
+        {/*<h3>Edit Liquor</h3>*/}
+        <form onSubmit={this.handleSubmit} className="form-inline">
           <input
             className="form-control form-control-sm"
             onChange={this.handleChange}
@@ -168,7 +175,9 @@ export default class EditLiquorForm extends Component {
             style={this.style.submit}
             type="submit"
             value="submit edits"
+            onClick={this.editLiquor}
           />
+          <br />
           <input
             className="form-control form-control-sm"
             type="submit"

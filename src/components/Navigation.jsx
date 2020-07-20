@@ -1,46 +1,56 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router /*Route, Link*/ } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class Navigation extends Component {
   style = {
     divStyle: {
       textAlign: "center",
     },
+    submit: {
+      width: "inherit",
+      backgroundColor: "#037bfe",
+      color: "#fff",
+      fontWeight: "600",
+      borderRadius: ".3rem",
+      marginTop: "0px",
+      position: "center",
+    },
+    links: { borderRadius: ".3rem", padding: "4px", fontWeight: "600" },
   };
   render() {
     const btn = "border border-white rounded btn-primary m-1";
     return (
-      <Router>
+      <nav>
         <div style={this.style.divStyle}>
           {/*<button className={btn} href="#">
               home
             </button>*/}
-          <button className={btn} href="#">
-            inventory
-          </button>
-          <button className={btn} href="#">
-            sales
-          </button>
-          <button className={btn} href="#">
-            about
-          </button>
-          <button className={btn} href="#">
+          <Link style={this.style.links} className={btn} to="/liquor">
+            liquor
+          </Link>
+          <Link style={this.style.links} className={btn} to="/food">
+            food
+          </Link>
+          <Link style={this.style.links} className={btn} to="/restop">
+            restop
+          </Link>
+          <Link style={this.style.links} className={btn} to="/recipes">
             recipes
-          </button>
-          <button className={btn} href="#">
+          </Link>
+          <Link style={this.style.links} className={btn} to="/invoices">
             invoices
-          </button>
-          <button className={btn} href="#">
+          </Link>
+          <Link style={this.style.links} className={btn} to="/calendar">
             calendar
-          </button>
-          <button className={btn} href="#">
+          </Link>
+          <Link style={this.style.links} className={btn} to="/todos">
             todos
-          </button>
-          <button className={btn} href="#">
+          </Link>
+          <Link style={this.style.links} className={btn} to="/contacts">
             contacts
-          </button>
+          </Link>
         </div>
-      </Router>
+      </nav>
     );
   }
 }

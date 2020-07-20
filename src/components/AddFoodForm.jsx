@@ -158,6 +158,7 @@ export default class Form extends Component {
             placeholder="notes"
             value={this.state.notes}
           />
+          <br />
           <input
             style={this.style.submit}
             type="submit"

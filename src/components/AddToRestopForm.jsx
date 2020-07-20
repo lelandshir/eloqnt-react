@@ -112,6 +112,7 @@ export default class Form extends Component {
             type="text"
             placeholder="item"
             value={this.state.item}
+            name="resItem"
           />
           <input
             onChange={this.handleChange}
@@ -169,6 +170,7 @@ export default class Form extends Component {
             placeholder="image url"
             value={this.state.img}
           />
+          <br />
           <input style={this.style.submit} type="submit" value="add item" />
         </form>
       </div>
