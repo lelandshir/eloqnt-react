@@ -24,16 +24,22 @@ export default class food extends Component {
   };
   //get foods in db
   componentDidMount() {
-    axios.get("/food").then((res) => {
-      this.setState({
-        food: res.data,
+    axios
+      .get(
+        "https://cors-anywhere.herokuapp.com/https://infinite-cliffs-04410.herokuapp.com/food"
+      )
+      .then((res) => {
+        this.setState({
+          food: res.data,
+        });
       });
-    });
   }
 
   deleteFoodItem = (_id, e) => {
     axios
-      .delete(`/food/${_id}`)
+      .delete(
+        `https://cors-anywhere.herokuapp.com/https://infinite-cliffs-04410.herokuapp.com/food/${_id}`
+      )
       .then((res) => {
         // console.log(res);
         // console.log(res.data);

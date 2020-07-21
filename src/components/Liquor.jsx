@@ -4,14 +4,11 @@ import AddLiquorForm from "./AddLiquorForm.jsx";
 import EditLiquorForm from "./EditLiquorForm.jsx";
 
 export default class Liquor extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      liquor: [],
-      header: "Liquor Inventory",
-      formVisible: false,
-    };
-  }
+  state = {
+    liquor: [],
+    header: "Liquor Inventory",
+    formVisible: false,
+  };
 
   style = {
     deleteButton: {

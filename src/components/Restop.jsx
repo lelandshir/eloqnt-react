@@ -23,16 +23,22 @@ export default class restop extends Component {
   };
   //get restops in db
   componentDidMount() {
-    axios.get("/restop").then((res) => {
-      this.setState({
-        restop: res.data,
+    axios
+      .get(
+        "https://cors-anywhere.herokuapp.com/https://infinite-cliffs-04410.herokuapp.com/restop"
+      )
+      .then((res) => {
+        this.setState({
+          restop: res.data,
+        });
       });
-    });
   }
 
   deleteRestopItem = (_id, e) => {
     axios
-      .delete(`/restop/${_id}`)
+      .delete(
+        `https://cors-anywhere.herokuapp.com/https://infinite-cliffs-04410.herokuapp.com/restop/${_id}`
+      )
       .then((res) => {
         // console.log(res);
         // console.log(res.data);
