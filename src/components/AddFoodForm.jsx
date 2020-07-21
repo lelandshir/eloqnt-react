@@ -3,6 +3,7 @@ import axios from "axios";
 
 export default class Form extends Component {
   state = {
+    liquor: [],
     item: "",
     category: "",
     cost: "",

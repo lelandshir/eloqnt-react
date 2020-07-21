@@ -4,11 +4,15 @@ import AddLiquorForm from "./AddLiquorForm.jsx";
 import EditLiquorForm from "./EditLiquorForm.jsx";
 
 export default class Liquor extends Component {
-  state = {
-    liquor: [],
-    header: "Liquor Inventory",
-    formVisible: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      liquor: [],
+      header: "Liquor Inventory",
+      formVisible: false,
+    };
+  }
+
   style = {
     deleteButton: {
       fontSize: "12px",
@@ -31,26 +35,32 @@ export default class Liquor extends Component {
   };
 
   componentDidMount() {
-    axios.get("/liquor").then((res) => {
-      this.setState({
-        liquor: res.data,
+    axios
+      .get(
+        "https://cors-anywhere.herokuapp.com/https://infinite-cliffs-04410.herokuapp.com/liquor"
+      )
+      .then((res) => {
+        this.setState({
+          liquor: res.data,
+        });
       });
-    });
   }
 
   editLiquor = (_id) => {
-    // e.preventDefault();
     axios
-      .put(`/liquor/${_id}`, {
-        brand: this.state.brand,
-        type: this.state.type,
-        vendor: this.state.vendor,
-        cost: this.state.cost,
-        qtyOnHand: this.state.qtyOnHand,
-        par: this.state.par,
-        orderQty: this.state.orderQty,
-        notes: this.state.notes,
-      })
+      .put(
+        `https://cors-anywhere.herokuapp.com/https://infinite-cliffs-04410.herokuapp.com/liquor/${_id}`,
+        {
+          brand: this.state.brand,
+          type: this.state.type,
+          vendor: this.state.vendor,
+          cost: this.state.cost,
+          qtyOnHand: this.state.qtyOnHand,
+          par: this.state.par,
+          orderQty: this.state.orderQty,
+          notes: this.state.notes,
+        }
+      )
       .then((res) => {
         console.log(res);
         console.log(res.data);
@@ -67,7 +77,9 @@ export default class Liquor extends Component {
   deleteLiquor = (_id, e) => {
     console.log(_id);
     axios
-      .delete(`/liquor/${_id}`)
+      .delete(
+        `https://cors-anywhere.herokuapp.com/https://infinite-cliffs-04410.herokuapp.com/liquor/${_id}`
+      )
       .then((res) => {
         console.log(res);
         console.log(res.data);
@@ -82,6 +94,7 @@ export default class Liquor extends Component {
   };
 
   render() {
+    console.log(this.state.liquor);
     return (
       <div style={this.style.container}>
         <AddLiquorForm />
