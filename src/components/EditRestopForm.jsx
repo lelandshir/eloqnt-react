@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-export default class EditLiquorForm extends Component {
+export default class EditRestopForm extends Component {
   state = {
     liquor: [],
     formVisible: false,
@@ -36,35 +36,36 @@ export default class EditLiquorForm extends Component {
   };
 
   componentDidMount() {
-    axios.get("/liquor").then((res) => {
+    axios.get("/restop").then((res) => {
       this.setState({
-        liquor: res.data,
+        restop: res.data,
       });
     });
   }
 
-  editLiquor = (_id) => {
+  editRestop = (_id) => {
     console.log(_id);
     axios
       .put(
-        `https://cors-anywhere.herokuapp.com/https://infinite-cliffs-04410.herokuapp.com/liquor/` +
+        `https://cors-anywhere.herokuapp.com/https://infinite-cliffs-04410.herokuapp.com/restop/` +
           _id,
         {
-          brand: this.state.brand,
-          type: this.state.type,
-          vendor: this.state.vendor,
+          item: this.state.item,
+          alias: this.state.alias,
           cost: this.state.cost,
           qtyOnHand: this.state.qtyOnHand,
           par: this.state.par,
           orderQty: this.state.orderQty,
+          vendor: this.state.vendor,
           notes: this.state.notes,
+          img: this.state.img,
         }
       )
       .then((res) => {
         console.log(res);
         console.log(res.data);
         this.setState({
-          liquor: res.data,
+          restop: res.data,
         });
       })
       .catch((err) => {
@@ -79,20 +80,21 @@ export default class EditLiquorForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
-      brand: this.state.brand,
-      type: this.state.type,
-      vendor: this.state.vendor,
+      item: this.state.item,
+      alias: this.state.alias,
       cost: this.state.cost,
       qtyOnHand: this.state.qtyOnHand,
       par: this.state.par,
       orderQty: this.state.orderQty,
+      vendor: this.state.vendor,
       notes: this.state.notes,
+      img: this.state.img,
     });
     this.props.toggleForm();
   };
 
   render() {
-    console.log(this.props.liquors);
+    // console.log(this.props.restop);
     return (
       <div
         align="center"
@@ -105,26 +107,26 @@ export default class EditLiquorForm extends Component {
           <input
             className="form-control form-control-sm"
             onChange={this.handleChange}
+            id={"item"}
+            type="text"
+            placeholder="item"
+            defaultValue={this.props.restops.item}
+          />
+          <input
+            className="form-control form-control-sm"
+            onChange={this.handleChange}
+            id={"alias"}
+            type="text"
+            placeholder="alias"
+            defaultValue={this.props.restops.alias}
+          />
+          <input
+            className="form-control form-control-sm"
+            onChange={this.handleChange}
             id={"cost"}
             type="number"
             placeholder="cost"
-            defaultValue={this.props.liquors.cost}
-          />
-          <input
-            className="form-control form-control-sm"
-            onChange={this.handleChange}
-            id={"qtyOnHand"}
-            type="number"
-            placeholder="on-hand"
-            defaultValue={this.props.liquors.qtyOnHand}
-          />
-          <input
-            className="form-control form-control-sm"
-            onChange={this.handleChange}
-            id={"par"}
-            type="number"
-            placeholder="PAR"
-            defaultValue={this.props.liquors.par}
+            defaultValue={this.props.restops.cost}
           />
           <input
             className="form-control form-control-sm"
@@ -132,31 +134,7 @@ export default class EditLiquorForm extends Component {
             id={"orderQty"}
             type="number"
             placeholder="order quantity"
-            defaultValue={this.props.liquors.orderQty}
-          />
-          <input
-            className="form-control form-control-sm"
-            onChange={this.handleChange}
-            id={"notes"}
-            type="text"
-            placeholder="notes"
-            defaultValue={this.props.liquors.notes}
-          />
-          <input
-            className="form-control form-control-sm"
-            onChange={this.handleChange}
-            width="21px"
-            id={"brand"}
-            type="text"
-            defaultValue={this.props.liquors.brand}
-          />
-          <input
-            className="form-control form-control-sm"
-            onChange={this.handleChange}
-            id={"type"}
-            type="text"
-            placeholder="type"
-            defaultValue={this.props.liquors.type}
+            defaultValue={this.props.restops.orderQty}
           />
           <input
             className="form-control form-control-sm"
@@ -164,7 +142,22 @@ export default class EditLiquorForm extends Component {
             id={"vendor"}
             type="text"
             placeholder="vendor"
-            defaultValue={this.props.liquors.vendor}
+            defaultValue={this.props.restops.vendor}
+          />
+          <input
+            className="form-control form-control-sm"
+            onChange={this.handleChange}
+            id={"notes"}
+            type="text"
+            defaultValue={this.props.restops.notes}
+          />
+          <input
+            className="form-control form-control-sm"
+            onChange={this.handleChange}
+            id={"img"}
+            type="text"
+            placeholder="image url"
+            defaultValue={this.props.restops.img}
           />
           <br />
           <input
@@ -172,7 +165,7 @@ export default class EditLiquorForm extends Component {
             style={this.style.submit}
             type="submit"
             value="submit edits"
-            onClick={() => this.editLiquor(this.props.liquors._id)}
+            onClick={() => this.editRestop(this.props.restops._id)}
           />
           <br />
           <input
