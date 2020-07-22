@@ -124,6 +124,7 @@ export default class EditFoodForm extends Component {
             onChange={this.handleChange}
             id={"cost"}
             type="number"
+            step=".01"
             placeholder="cost"
             defaultValue={this.props.foods.cost}
           />
@@ -132,6 +133,7 @@ export default class EditFoodForm extends Component {
             onChange={this.handleChange}
             id={"qtyOnHand"}
             type="number"
+            step=".01"
             placeholder="on-hand"
             defaultValue={this.props.foods.qtyOnHand}
           />
@@ -139,7 +141,8 @@ export default class EditFoodForm extends Component {
             className="form-control form-control-sm"
             onChange={this.handleChange}
             id={"par"}
-            type="text"
+            type="number"
+            step=".01"
             placeholder="PAR"
             defaultValue={this.props.foods.par}
           />
@@ -154,7 +157,8 @@ export default class EditFoodForm extends Component {
             className="form-control form-control-sm"
             onChange={this.handleChange}
             id={"orderQty"}
-            type="text"
+            type="number"
+            step=".01"
             placeholder="order quantity"
             defaultValue={this.props.foods.orderQty}
           />

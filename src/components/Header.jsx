@@ -5,12 +5,18 @@ export default class Header extends Component {
   style = {
     textAlign: "center",
     padding: "0",
+    ptag: {
+      marginTop: "40px",
+      fontFamily: "Mansalva",
+    },
   };
   render() {
     return (
-      <div className="header" style={this.style}>
-        <h1 style={this.style}>{this.title}</h1>
-        <p style={this.style}>your restaurant management assistant</p>
+      <div style={this.style}>
+        <h1 className="header">{this.title}</h1>
+        <p className={"tagline"} style={this.style.ptag}>
+          your restaurant management assistant
+        </p>
         <hr />
       </div>
     );

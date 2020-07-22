@@ -125,6 +125,7 @@ export default class EditRestopForm extends Component {
             onChange={this.handleChange}
             id={"cost"}
             type="number"
+            step=".01"
             placeholder="cost"
             defaultValue={this.props.restops.cost}
           />

@@ -125,6 +125,7 @@ export default class Form extends Component {
             onChange={this.handleChange}
             id={"cost"}
             type="number"
+            step=".01"
             placeholder="cost"
             value={this.state.cost}
           />
@@ -171,7 +172,11 @@ export default class Form extends Component {
             value={this.state.img}
           />
           <br />
-          <input style={this.style.submit} type="submit" value="add item" />
+          <input
+            style={this.style.submit}
+            type="submit"
+            value="add restop item"
+          />
         </form>
       </div>
     );

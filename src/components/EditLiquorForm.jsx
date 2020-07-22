@@ -107,6 +107,7 @@ export default class EditLiquorForm extends Component {
             onChange={this.handleChange}
             id={"cost"}
             type="number"
+            step=".01"
             placeholder="cost"
             defaultValue={this.props.liquors.cost}
           />
@@ -115,6 +116,7 @@ export default class EditLiquorForm extends Component {
             onChange={this.handleChange}
             id={"qtyOnHand"}
             type="number"
+            step=".01"
             placeholder="on-hand"
             defaultValue={this.props.liquors.qtyOnHand}
           />
@@ -123,6 +125,7 @@ export default class EditLiquorForm extends Component {
             onChange={this.handleChange}
             id={"par"}
             type="number"
+            step=".01"
             placeholder="PAR"
             defaultValue={this.props.liquors.par}
           />
@@ -131,6 +134,7 @@ export default class EditLiquorForm extends Component {
             onChange={this.handleChange}
             id={"orderQty"}
             type="number"
+            step=".01"
             placeholder="order quantity"
             defaultValue={this.props.liquors.orderQty}
           />

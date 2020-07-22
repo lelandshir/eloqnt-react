@@ -131,6 +131,7 @@ export default class Form extends Component {
             onChange={this.handleChange}
             id={"cost"}
             type="number"
+            step=".01"
             placeholder="cost"
             value={this.state.cost}
             name="liqCost"
@@ -139,6 +140,7 @@ export default class Form extends Component {
             onChange={this.handleChange}
             id={"qtyOnHand"}
             type="number"
+            step=".01"
             placeholder="on-hand"
             value={this.state.qtyOnHand}
             name="liqOH"

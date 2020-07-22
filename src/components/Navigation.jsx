@@ -15,7 +15,12 @@ export default class Navigation extends Component {
       marginTop: "0px",
       position: "center",
     },
-    links: { borderRadius: ".3rem", padding: "4px", fontWeight: "600" },
+    links: {
+      borderRadius: ".3rem",
+      fontFamily: "Mansalva",
+      padding: "4px",
+      fontWeight: "600",
+    },
   };
   render() {
     const btn = "border border-white rounded btn-primary m-1";
@@ -25,6 +30,9 @@ export default class Navigation extends Component {
           {/*<button className={btn} href="#">
               home
             </button>*/}
+          <Link style={this.style.links} className={btn} to="/home">
+            home
+          </Link>
           <Link style={this.style.links} className={btn} to="/liquor">
             liquor
           </Link>
@@ -34,14 +42,14 @@ export default class Navigation extends Component {
           <Link style={this.style.links} className={btn} to="/restop">
             restop
           </Link>
+          <Link style={this.style.links} className={btn} to="/restop_id">
+            restop catalog
+          </Link>
           <Link style={this.style.links} className={btn} to="/recipes">
             recipes
           </Link>
           <Link style={this.style.links} className={btn} to="/invoices">
             invoices
-          </Link>
-          <Link style={this.style.links} className={btn} to="/calendar">
-            calendar
           </Link>
           <Link style={this.style.links} className={btn} to="/todos">
             todos
